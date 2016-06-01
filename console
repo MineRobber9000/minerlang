@@ -7,7 +7,7 @@ running = True
 while running:
 	command = raw_input("> ")
 	try:
-		if command == "quit":
+		if command in ("quit","exit","q"):
 			running = False
 		else:
 			m.run(command)
