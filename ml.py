@@ -9,7 +9,8 @@ class minerlang:
 		"/": lambda self: self.divide(),
 		"store": lambda self: self.store(),
 		"load": lambda self: self.load(),
-		"tell": lambda self: self.stack[len(self.stack)-1]
+		"tell": lambda self: self.stack[len(self.stack)-1],
+		"tellstack": lambda self: "["+(", ".join([str(x) for x in self.stack]))+"]"
 	}
 	"""A minerlang interpreter."""
 	def __init__(self):
@@ -18,9 +19,9 @@ class minerlang:
 	def run(self, macro):
 		macro_parts = macro.split(" ");
 		for part in macro_parts:
-			if part in ("+","-","*","/","tell","clear","store","load"):
-				if part == "tell":
-					print(self.VarWords["tell"](self))
+			if part in ("+","-","*","/","tell","clear","store","load","tellstack"):
+				if part == "tell" or part == "tellstack":
+					print(self.VarWords[part](self))
 				elif part == "clear":
 					self.stack = []
 				elif part == "store" or part == "load":
